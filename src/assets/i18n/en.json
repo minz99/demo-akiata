@@ -1,0 +1,16 @@
+{
+  "Todo-List": "Todo List",
+  "Do-it-now": "Do it now",
+  "ID": "ID",
+  "Task-Name": "Task Name",
+  "Status": "Status",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Add-Task": "Add Task",
+  "Due-Date": "Due Date",
+  "TODO": "TODO",
+  "IN_PROGRESS": "IN PROGRESS",
+  "COMPLETE": "COMPLETE",
+  "Delete-this-item?": "Delete this item?",
+  "Search": "Search"
+}

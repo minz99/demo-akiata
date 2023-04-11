@@ -1,0 +1,5 @@
+<div nz-row nzJustify="end">
+  <select (change)="switchLanguage($event)">
+    <option *ngFor="let language of languages" [value]="language" >{{ language }}</option>
+  </select>
+</div>

@@ -1,0 +1,39 @@
+nz-layout {
+  background: white ;
+}
+
+nz-table {
+  text-align: center;
+}
+
+nz-header {
+  background: white;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  height: auto;
+}
+
+nz-content {
+  color: white;
+  min-height: 120px;
+  line-height: 120px;
+}
+
+td, th{
+  text-align: center !important;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 16px;
+  vertical-align: center;
+}
+
+.padding-horizontal-10 {
+  padding: 10px 0px;
+}
+

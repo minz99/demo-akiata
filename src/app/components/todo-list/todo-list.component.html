@@ -1,0 +1,56 @@
+<nz-layout>
+  <nz-header>
+    <div nz-row nzJustify="start" class="title">{{ 'Todo-List' | translate }}</div>
+    <div nz-row nzJustify="space-between" class="padding-horizontal-10">
+
+      <div nz-col nz-space nzSpan="3">
+        <nz-input-group nzPrefixIcon="search">
+          <input type="text" [placeholder]="'Search' | translate" nz-input [(ngModel)]="dataSearch" (ngModelChange)="search(dataSearch)"/>
+        </nz-input-group>
+      </div>
+      <button nz-col nz-button nzType="default" (click)="showPopup('ADD', undefined)">{{ 'Add-Task' | translate }}</button>
+    </div>
+  </nz-header>
+  <nz-content>
+    <nz-table #items [nzData]='(todoItems$ | async)!'>
+      <thead>
+      <tr>
+        <th>{{ '#' }}</th>
+        <th>{{ 'Task-Name' | translate }}</th>
+        <th>{{ 'Status' | translate }}</th>
+        <th>{{ 'Edit' | translate }}</th>
+        <th>{{ 'Delete' | translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items.data; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.taskName }}</td>
+        <td>
+          <button nz-button nzType="default">{{ item.status | translate }}</button>
+        </td>
+        <td>
+          <button nz-button nzType="default">
+            <span nz-icon nzType="edit" nzTheme="twotone"(click)="showPopup('EDIT', item)"></span>
+          </button>
+        </td>
+        <td>
+          <button nz-button nzType="default">
+            <span nz-icon nzType="delete" nzTheme="fill" (click)="showWarning()"></span>
+          </button>
+          <nz-modal
+            [(nzVisible)]="isVisible"
+            [nzTitle]="'Delete' | translate"
+            (nzOnCancel)="handleCancel()"
+            (nzOnOk)="handleOk(item.id)"
+            [nzOkLoading]="isOkLoading"
+          >
+            <p *nzModalContent> {{'Delete-this-item?' | translate}} </p>
+          </nz-modal>
+
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-content>
+</nz-layout>

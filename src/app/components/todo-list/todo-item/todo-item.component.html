@@ -1,0 +1,28 @@
+<form nz-form [formGroup]="todoForm">
+  <!--  taskName-->
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzLabelAlign="left">{{ 'Task-Name' | translate }}</nz-form-label>
+    <nz-form-control nzSpan="20" nzErrorTip="This field is required!">
+      <input type="text" nz-input formControlName="taskName" [(ngModel)]="taskName"/>
+    </nz-form-control>
+  </nz-form-item>
+  <!--  dueDate-->
+  <nz-form-item nzAlign="middle">
+    <nz-form-label nzSpan="4" nzLabelAlign="left">{{ 'Due-Date' | translate }}</nz-form-label>
+    <nz-form-control nzSpan="20" nzErrorTip="This field is required!">
+      <nz-date-picker nzShowTime formControlName="dueDate" [(ngModel)]="dueDate" nzFormat="HH:mm dd-MM-yyyy"
+                      style="width: 100%"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <!--  status-->
+  <nz-form-item>
+    <nz-form-label nzSpan="4" nzLabelAlign="left">{{ 'Status' | translate }}</nz-form-label>
+    <nz-form-control nzSpan="20" nzErrorTip="This field is required!">
+      <nz-select formControlName="status" [(ngModel)]="status" style="width: 100%">-->
+        <div *ngFor="let status of statusList ">
+          <nz-option [nzValue]="status" nzLabel="{{status | translate}}"></nz-option>
+        </div>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -1,0 +1,15 @@
+{
+  "Todo-List": "Danh sách việc cần làm",
+  "ID": "ID",
+  "Task-Name": "Tên Task",
+  "Status": "Trạng Thái",
+  "Edit": "Sửa",
+  "Delete": "Xoá",
+  "Add-Task": "Thêm Task",
+  "Due-Date": "Thời Hạn",
+  "TODO": "CHƯA LÀM",
+  "IN_PROGRESS": "ĐANG LÀM",
+  "COMPLETE": "HOÀN THÀNH",
+  "Delete-this-item?": "Xoá mục này?",
+  "Search": "Tìm kiếm"
+}
