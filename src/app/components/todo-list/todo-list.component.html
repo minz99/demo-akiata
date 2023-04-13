@@ -27,7 +27,7 @@
         <td>{{ i + 1 }}</td>
         <td>{{ item.taskName }}</td>
         <td>
-          <button nz-button nzType="default">{{ item.status | translate }}</button>
+          <button nz-button [nzType]="item.status === 'TODO' ? 'default' : 'primary'">{{ item.status | translate }}</button>
         </td>
         <td>
           <button nz-button nzType="default">
@@ -54,3 +54,9 @@
     </nz-table>
   </nz-content>
 </nz-layout>
+
+<ngx-image-editor
+  image="'/path/to/image.jpg'"
+  [textAreas]="[{x: 10, y: 10, width: 100, height: 50, text: 'Hello World!'}]"
+  [showProperties]="true"
+></ngx-image-editor>

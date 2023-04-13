@@ -1,0 +1,14 @@
+[
+  {
+    "id": "vi",
+    "TODO": "CHƯA LÀM",
+    "IN_PROGRESS": "ĐANG LÀM",
+    "COMPLETE": "HOÀN THÀNH"
+  },
+  {
+    "id": "en",
+    "TODO": "TODO",
+    "IN_PROGRESS": "IN PROGRESS",
+    "COMPLETE": "COMPLETE"
+  }
+]

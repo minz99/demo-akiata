@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {TodoQuery} from "../../state/todo-query";
+import {TodoQuery} from "../../state/todo/todo-query";
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {TodoItemComponent} from "./todo-item/todo-item.component";
-import {TodoStore} from "../../state/todo-store";
+import {TodoStore} from "../../state/todo/todo-store";
 import {guid} from "@datorama/akita";
 import {Todo} from "../../shared/models/todo";
-import {map, Subject} from "rxjs";
-import {StatusEnum} from "../../shared/enums/status-enum";
+import {map} from "rxjs";
+import {TranslationQuery} from "../../state/translation/translation-query";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-todo-list',
@@ -26,12 +27,14 @@ export class TodoListComponent implements  OnInit {
   constructor(
     private todoQuery: TodoQuery,
     private todoStore: TodoStore,
+    private translateService: TranslateService,
+    private translationQuery: TranslationQuery,
     private modalService: NzModalService,
   ) {
   }
 
   ngOnInit(): void {
-    console.log(Object.keys(StatusEnum))
+    // console.log(Object.keys(StatusEnum))
   }
   showPopup(action: string, editedItem?: Todo): void {
     let modalRef: NzModalRef<TodoItemComponent>;
@@ -108,11 +111,32 @@ export class TodoListComponent implements  OnInit {
   }
 
   search(dataSearch: string) {
-    const str = dataSearch.toLowerCase();
-
+    // const statusKey = this.getDataTranslation(dataSearch);
     this.todoItems$ = this.todoQuery.selectAll({
-      filterBy: [(todo: Todo) => todo.taskName.includes(this.dataSearch) || todo.status.includes(this.dataSearch)]
-    });
+      // filterBy: [(todo: Todo) => todo.taskName.includes(this.dataSearch) || statusKey.includes(todo.status)]
+    }).pipe(
+        map(todos => {
+          /* get current language, by default when app start, current lang is null, so take default lang */
+          const currentLanguage = this.translateService.currentLang || this.translateService.defaultLang;
+          const statusKey = Object.keys(
+            Object.fromEntries(
+              Object.entries(
+                this.translationQuery.getEntity(currentLanguage) || {}).filter(([key, value]) => value.toLowerCase().includes(dataSearch.toLowerCase()))
+            )
+          );
+          return todos.filter(todo => todo.taskName.toLowerCase().includes(this.dataSearch.toLowerCase()) || statusKey.includes(todo.status));
+        })
+    )
+  }
+
+  getDataTranslation(dataSearch: string) {
+    const currentLanguage = this.translateService.currentLang || this.translateService.defaultLang;
+    return Object.keys(
+      Object.fromEntries(
+        Object.entries(
+          this.translationQuery.getEntity(currentLanguage) || {}).filter(([key, value]) => value.toLowerCase().includes(dataSearch.toLowerCase()))
+      )
+    );
   }
 
   convert2Todo(o: any) {
